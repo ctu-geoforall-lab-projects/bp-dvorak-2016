@@ -1,0 +1,24 @@
+# This file contains metadata for your plugin. Since 
+# version 2.0 of QGIS this is the proper way to supply 
+# information about a plugin. The old method of 
+# embedding metadata in __init__.py will 
+# is no longer supported since version 2.0.
+# This file should be included when you package your plugin.# Mandatory items:
+
+[general]
+name=Nástroj pro práci s daty RUIAN
+qgisMinimumVersion=2.0
+description=Nástroj umožňuje importovat data RUIAN do mnoha formátů včetně databází a následně s nimi pracovat. Pro práci s daty RUIAN je nutná instalace knihovny GDAL/OGR vyšší než 1.11.
+version=0.1
+author=Jan Klima
+email=honzi.klima@gmail.com
+
+# changelog=
+tags=VFR, VDP, RUIAN
+homepage=
+tracker=
+repository=
+icon=files/icon.png
+experimental=True
+deprecated=False
+
