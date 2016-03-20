@@ -1,7 +1,19 @@
-# Bakalářská práce Dennis Dvořák 2016
+# Bakalářská práce
 
-Téma: Nástroj pro práci s daty RÚIAN v programu QGIS
+## Název
 
-Zadáno: 22.2.2016
+**Nástroj pro práci s daty RÚIAN v programu QGIS**
 
-Termín odevzdání: 22.5.2015
+## Student
+
+Dennis Dvořák
+
+## Vedoucí
+
+Ing. Martin Landa, Ph.D.
+
+## Obhajoba
+
+06/2016
+
+## Text
