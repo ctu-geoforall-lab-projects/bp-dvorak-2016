@@ -273,6 +273,7 @@ class ImportThread(QtCore.QThread):
 	importEnd = QtCore.pyqtSignal()
  	importStat = QtCore.pyqtSignal(int,int,str)
 
+
 	def __init__(self, option):
   		QtCore.QThread.__init__(self)
   		self.layers = option['layers_name']
@@ -285,4 +286,7 @@ class ImportThread(QtCore.QThread):
    			self.importStat.emit(i, n, l)
    			i += 1
    		self.importEnd.emit()
-  		
+
+class VfrOgr:
+    def __init__(self, frmt, dsn, geom_name=None, layers=[], nogeomskip=False,
+                 overwrite=False, lco_options=[]):
