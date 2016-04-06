@@ -287,6 +287,3 @@ class ImportThread(QtCore.QThread):
    			i += 1
    		self.importEnd.emit()
 
-class VfrOgr:
-    def __init__(self, frmt, dsn, geom_name=None, layers=[], nogeomskip=False,
-                 overwrite=False, lco_options=[]):
