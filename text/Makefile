@@ -1,4 +1,4 @@
-FILE=dennis-dvorak-2016
+FILE=dennis-dvorak-bp-2016
 
 all:
 	pdflatex $(FILE)
