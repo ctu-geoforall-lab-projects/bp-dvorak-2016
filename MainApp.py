@@ -30,7 +30,7 @@ from osgeo import ogr, gdal
 from Connection import Connection
 from ui_MainApp import Ui_MainApp
 import time
-
+from gdal_vfr.vfr4ogr import VfrOgr
 
 class MainApp(QtGui.QDialog):
 
