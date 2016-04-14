@@ -7,8 +7,8 @@
                              -------------------
         begin                : 2015-03-16
         git sha              : $Format:%
-        copyright            : (C) 2015 by Jan Klima
-        email                : honzi.klima@gmail.com
+        copyright            : (C) 2015 by Jan Klima (C) 2016 by Dennis Dvořák
+        email                : honzi.klima@gmail.com; dennis.dvorak@email.cz
  ***************************************************************************/
 
 /***************************************************************************
@@ -38,7 +38,8 @@ class MainApp(QtGui.QDialog):
         QtGui.QDialog.__init__(self)
         self.iface = iface
         self.driverTypes = {'PostgreSQL':'PG','MSSQLSpatial':'MSSQL','SQLite':'sqlite','ESRI Shapefile':'shp','GPKG':'gpkg','Nepodporuje':0}
-        self.driverNames = ['PostgreSQL','MSSQLSpatial','SQLite','GPKG', 'ESRI Shapefile', 'Nepodporuje']
+        self.driverNames = ['SQLite']
+        #'PostgreSQL','MSSQLSpatial','SQLite','GPKG', 'ESRI Shapefile', 'Nepodporuje'
         self.missDrivers = []
         self.option = {'driver':None, 'datasource':None, 'layers':[], 'layers_name':[], 'overwrite':False}
 
@@ -287,3 +288,5 @@ class ImportThread(QtCore.QThread):
    			i += 1
    		self.importEnd.emit()
 
+    # create convertor
+        ogr = VfrOgr(frmt='SQLite', dsn="C:\Users\Libor Sobotovic\.qgis2\python\plugins\ bp-dvorak-2016\databaze.db", overwrite=True)
