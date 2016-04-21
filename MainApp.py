@@ -289,4 +289,4 @@ class ImportThread(QtCore.QThread):
    		self.importEnd.emit()
 
     # create convertor
-        ogr = VfrOgr(frmt='SQLite', dsn="C:\Users\Libor Sobotovic\.qgis2\python\plugins\ bp-dvorak-2016\databaze.db", overwrite=True)
+        #ogr = VfrOgr(frmt='SQLite', dsn="C:\Users\Libor Sobotovic\.qgis2\python\plugins\ bp-dvorak-2016\databaze.db", overwrite=True)
