@@ -271,22 +271,28 @@ class MainApp(QtGui.QDialog):
 
 
 class ImportThread(QtCore.QThread):
-	importEnd = QtCore.pyqtSignal()
- 	importStat = QtCore.pyqtSignal(int,int,str)
+    importEnd = QtCore.pyqtSignal()
+    importStat = QtCore.pyqtSignal(int,int,str)
 
+    def __init__(self, option):
+        QtCore.QThread.__init__(self)
+        self.layers = option['layers']
 
-	def __init__(self, option):
-  		QtCore.QThread.__init__(self)
-  		self.layers = option['layers_name']
- 
- 	def run(self):
- 		n = len(self.layers)
- 		i = 1
-  		for l in self.layers:
-   			time.sleep(1)
-   			self.importStat.emit(i, n, l)
-   			i += 1
-   		self.importEnd.emit()
+    def run(self):
+        # create convertor
+        ogr = VfrOgr(frmt='SQLite', dsn="/tmp/databaze.db", overwrite=True, geom_name='OriginalniHranice')
 
-    # create convertor
-        ogr = VfrOgr(frmt='SQLite', dsn="C:\Users\Libor Sobotovic\.qgis2\python\plugins\ bp-dvorak-2016\databaze.db", overwrite=True)
+        n = len(self.layers)
+        i = 1
+        for l in self.layers:
+            filename = 'OB_{}_UKSH'.format(l)
+            QtCore.qDebug('\n (VFR) Processing file: {}'.format(filename))
+            self.importStat.emit(i, n, l)
+            # download
+            ogr.reset()
+            ogr.download([filename])
+            # import
+            ogr.run(True if i > 1 else False)
+            i += 1
+        
+        self.importEnd.emit()
