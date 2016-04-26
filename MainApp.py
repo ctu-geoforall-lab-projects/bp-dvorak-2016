@@ -271,6 +271,7 @@ class MainApp(QtGui.QDialog):
 
 
 class ImportThread(QtCore.QThread):
+<<<<<<< HEAD
 	importEnd = QtCore.pyqtSignal()
  	importStat = QtCore.pyqtSignal(int,int,str)
 
@@ -290,3 +291,64 @@ class ImportThread(QtCore.QThread):
 
     # create convertor
         #ogr = VfrOgr(frmt='SQLite', dsn="C:\Users\Libor Sobotovic\.qgis2\python\plugins\ bp-dvorak-2016\databaze.db", overwrite=True)
+=======
+    importEnd = QtCore.pyqtSignal()
+    importStat = QtCore.pyqtSignal(int,int,str)
+
+    def __init__(self, option):
+        QtCore.QThread.__init__(self)
+        self.layers = option['layers']
+
+    def run(self):
+        # create convertor
+        ogr = VfrOgr(frmt='SQLite', dsn="C:/Users/databaze.db", overwrite=True, geom_name='OriginalniHranice')
+
+        n = len(self.layers)
+        i = 1
+        for l in self.layers:
+            filename = 'OB_{}_UKSH'.format(l)
+            QtCore.qDebug('\n (VFR) Processing file: {}'.format(filename))
+            self.importStat.emit(i, n, l)
+            # download
+            ogr.reset()
+            ogr.download([filename])
+            # import
+            ogr.run(True if i > 1 else False)
+            i += 1
+        
+        self.importEnd.emit()
+>>>>>>> origin/master
+
+class DockingFrame(wx.Frame):
+    def __init__(self, parent):
+        wx.Frame.__init__(self, parent, style=wx.CAPTION)
+
+        parent.Bind(wx.EVT_MOVE, self.OnParentMove)
+        parent.Bind(wx.EVT_ACTIVATE, self.OnParentActivate)
+        parent.Bind(wx.EVT_SHOW, self.OnParentShow)
+
+    def OnParentMove(self, moveEvent):
+        print "Docked frame parent moved"
+        pr = positioning.position(
+            self.Rect,
+            my='right_top', at='left_top', of=self.Parent.Rect)
+        self.Move(pr.top_left)
+        moveEvent.Skip()
+
+    def OnParentActivate(self, event):
+        print "Docked frame parent activated"
+        self.Raise()
+        event.Skip()
+
+    def OnParentShow(self, event):
+        print "Docked frame parent showed"
+        self.Show(event.GetShow())
+        event.Skip()
+
+class MainFrame(wx.Frame):
+    def __init__(self, title):
+        wx.Frame.__init__(self, None, title=title)
+
+        self.info_frame = DockingFrame(self)
+
+        self.Show(True)
