@@ -22,6 +22,8 @@
 """
 # Import the PyQt, QGIS libraries and classes
 import os
+import sys
+
 #import subprocess
 from PyQt4 import QtCore, QtGui
 from qgis.core import *
@@ -280,7 +282,8 @@ class ImportThread(QtCore.QThread):
 
     def run(self):
         # create convertor
-        ogr = VfrOgr(frmt='SQLite', dsn="ruian.db", overwrite=True, geom_name='OriginalniHranice')
+        os.environ['DATA_DIR'] = os.environ['HOMEPATH'] if sys.platform.startswith('win') else os.environ['HOME']
+        ogr = VfrOgr(frmt='SQLite', dsn=os.path.join(os.environ['DATA_DIR'], 'ruian.db'), overwrite=True, geom_name='OriginalniHranice')
 
         n = len(self.layers)
         i = 1
