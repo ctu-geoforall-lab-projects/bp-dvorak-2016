@@ -280,7 +280,7 @@ class ImportThread(QtCore.QThread):
 
     def run(self):
         # create convertor
-        ogr = VfrOgr(frmt='SQLite', dsn="C:/Users/databaze.db", overwrite=True, geom_name='OriginalniHranice')
+        ogr = VfrOgr(frmt='SQLite', dsn="ruian.db", overwrite=True, geom_name='OriginalniHranice')
 
         n = len(self.layers)
         i = 1
