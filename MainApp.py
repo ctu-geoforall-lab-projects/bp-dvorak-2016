@@ -248,9 +248,8 @@ class MainApp(QtGui.QDialog):
         	self.importThread.start()
     
     # update progress status
-    def set_status(self, num, tot, text):
-    	self.progress.setLabelText(u'Import ' + str(num) + ' z ' + str(tot) + ' (' + text + ')')
-    	print text
+    def set_status(self, num, tot, text, operation):
+    	self.progress.setLabelText(u'{0} {1} z {2} ({3})'.format(operation, num, tot, text))
 
     # terminate import
     def import_close(self):
@@ -274,7 +273,7 @@ class MainApp(QtGui.QDialog):
 
 class ImportThread(QtCore.QThread):
     importEnd = QtCore.pyqtSignal()
-    importStat = QtCore.pyqtSignal(int,int,str)
+    importStat = QtCore.pyqtSignal(int,int,str,str)
 
     def __init__(self, option):
         QtCore.QThread.__init__(self)
@@ -290,11 +289,12 @@ class ImportThread(QtCore.QThread):
         for l in self.layers:
             filename = 'OB_{}_UKSH'.format(l)
             QtCore.qDebug('\n (VFR) Processing file: {}'.format(filename))
-            self.importStat.emit(i, n, l)
             # download
             ogr.reset()
+            self.importStat.emit(i, n, l, "Download")
             ogr.download([filename])
             # import
+            self.importStat.emit(i, n, l, "Import")
             ogr.run(True if i > 1 else False)
             i += 1
         
