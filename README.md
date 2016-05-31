@@ -14,6 +14,8 @@ Ing. Martin Landa, Ph.D.
 
 ## Obhajoba
 
-06/2016
+Nepřipuštěno k obhajobě
 
 ## Text
+
+[dennis-dvorak-bp-2016.pdf](https://github.com/ctu-osgeorel-proj/bp-dvorak-2016/raw/master/text/dennis-dvorak-bp-2016.pdf)
